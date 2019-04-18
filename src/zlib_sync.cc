@@ -252,4 +252,7 @@ NAN_MODULE_INIT(AllInit) {
     Nan::DefineOwnProperty(target, Nan::New<String>("ZLIB_VERSION").ToLocalChecked(), Nan::New<String>(zlibVersion()).ToLocalChecked(), static_cast<v8::PropertyAttribute>(v8::ReadOnly | v8::DontDelete));
 }
 
-NODE_MODULE(zlib_sync, AllInit)
+// Declare this addon as context-aware.
+NODE_MODULE_INIT(/* exports, module, context */) {
+    AllInit(exports);
+}
